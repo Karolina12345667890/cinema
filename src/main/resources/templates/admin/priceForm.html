@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dodaj/Edytuj film</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(adminPanel)"></header>
+
+<div class="container">
+    <form th:action="@{/admin/priceForm}" th:object="${price}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label for="movieTitle">Cena: </label>
+            <input type="text" class="form-control" id="movieTitle" th:field="*{price}">
+            <div class="alert alert-danger my-3" role="alert" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+        </div>
+        <div class="form-check" th:each="typeTicket : ${typeTicketList}">
+            <input type="checkbox" class="form-check-input" th:field="*{typeTicket}" th:value="${typeTicket.id}">
+            <label class="form-check-label" th:for="${#ids.prev('typeTicket')}" th:text="#{${typeTicket.name}}"></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+    </form>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>
