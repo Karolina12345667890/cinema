@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Lista gatunków</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(adminPanel)"></header>
+<div class="container">
+    <h2 class="mb-4">Lista gatunków</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Edytuj</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${typeMovieList.isEmpty()}">
+            <td colspan="2" scope="row" class="text-center">Brak gatunków.</td>
+        </tr>
+        <tr th:if="${!typeMovieList.isEmpty()}" th:each="typeMovie : ${typeMovieList}">
+            <td scope="row" class="align-middle" th:text="${typeMovie.name}"></td>
+            <td><a th:href="@{typeMovieForm(id=${typeMovie.id})}" class="btn btn-secondary btn-sm">Edytuj</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/admin/typeMovieForm" class="btn btn-primary">Dodaj</a>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

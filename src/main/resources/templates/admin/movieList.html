@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List gatunków</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(adminPanel)"></header>
+<div class="container">
+    <h2 class="mb-4">Lista filmów</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Reżyser</th>
+            <th scope="col">Plakat</th>
+            <th scope="col" class="text-right">Edytuj / Usuń</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${movieList.isEmpty()}">
+            <td colspan="6" scope="row" class="text-center">Brak filmów.</td>
+        </tr>
+        <tr th:if="${!movieList.isEmpty()}" th:each="movie : ${movieList}">
+            <td scope="row" class="align-middle" th:text="${movie.name}"></td>
+            <td class="align-middle" th:text="${movie.director}"></td>
+            <td class="align-middle" th:text="${movie.poster}"></td>
+            <td class="text-right">
+                <a th:href="@{movieForm(id=${movie.id})}" class="btn btn-secondary btn-sm">Edytuj</a>
+                <a th:href="@{deleteMovie(id=${movie.id})}" class="btn btn-danger btn-sm">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/admin/movieForm" class="btn btn-primary">Dodaj</a>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

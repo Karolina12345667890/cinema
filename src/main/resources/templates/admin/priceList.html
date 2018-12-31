@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List gatunków</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(adminPanel)"></header>
+<div class="container">
+    <h2 class="mb-4">Lista filmów</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Cena</th>
+            <th scope="col">Typ Biletu</th>
+            <th scope="col" class="text-right">Edytuj / Usuń</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${priceList.isEmpty()}">
+            <td colspan="6" scope="row" class="text-center">Brak cen.</td>
+        </tr>
+        <tr th:if="${!priceList.isEmpty()}" th:each="price : ${priceList}">
+            <td scope="row" class="align-middle" th:text="${price.price}"></td>
+            <td scope="row" class="align-middle" th:text="${price.typeTicket.name}"></td>
+
+            <!--<td class="align-middle" th:if="${price.type_ticket_id.equals(typeTicket.id)}" th:text="${price.name}"></td>-->
+
+
+            <td class="text-right">
+                <a th:href="@{priceForm(id=${price.id})}" class="btn btn-secondary btn-sm">Edytuj</a>
+                <a th:href="@{deletePrice(id=${price.id})}" class="btn btn-danger btn-sm">Usuń</a>
+            </td>
+        </tr>
+        <!--<td th:if="${!typeTicketList.isEmpty()}" th:each="type : ${typeTicketList}">-->
+            <!--<td scope="row" class="align-middle" th:text="${type.name}"></td>-->
+        <!--</td>-->
+        </tbody>
+    </table>
+
+    <a href="/admin/priceForm" class="btn btn-primary">Dodaj</a>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

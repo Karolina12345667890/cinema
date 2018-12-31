@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+
+    <title>Home</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+
+<body>
+
+<header th:replace="fragments/header :: header(index)"></header>
+<div id="main" class="card-body">
+    <h1>wertyu</h1>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+
+</body>
+</html>
