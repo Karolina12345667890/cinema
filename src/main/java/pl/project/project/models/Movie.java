@@ -20,6 +20,7 @@ public class Movie {
     @Length(min = 5, max = 50)
     private String director;
 
+    @Length(min=3, max=50000)
     private String poster;
 
     @ManyToMany(fetch = FetchType.EAGER)

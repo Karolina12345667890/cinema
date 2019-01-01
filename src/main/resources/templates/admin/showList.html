@@ -6,7 +6,7 @@
     <th:block th:include="fragments/general :: headerFiles"></th:block>
 </head>
 <body>
-<header th:replace="fragments/header :: header(activeTab = 'adminPanel', activeAdmintab = 'screeningList')"></header>
+<header th:replace="fragments/header :: header(activeTab = 'adminPanel', activeAdmintab = 'showList')"></header>
 <div class="container">
     <h2 class="mb-4">Lista seansów</h2>
     <table class="table table-hover">
@@ -16,7 +16,8 @@
             <th scope="col">Data</th>
             <th scope="col">Sala</th>
             <th scope="col">Ilość rezerwacji</th>
-            <th scope="col">Edytuj / Usuń</th>
+            <th scope="col">Edytuj</th>
+            <th scope="col">Usuń</th>
         </tr>
         </thead>
         <tbody>
@@ -25,10 +26,11 @@
         </tr>
         <tr th:if="${!showList.isEmpty()}" th:each="show : ${showList}">
             <td scope="row" class="align-middle" th:text="${show.movie.name}"></td>
-            <td class="align-middle" th:text="${show.date}"></td>
+            <td class="align-middle" th:text="${#dates.format(show.date, 'yyyy-MM-dd HH:mm')}"></td>
             <td class="align-middle" th:text="${show.hall.name}"></td>
-            <td class="align-middle" th:text="${show.reservedSeats.size()}"></td>
+            <td class="align-middle" th:text="${show.reservationSeats.size()}"></td>
             <td><a th:href="@{showForm(id=${show.id})}" class="btn btn-secondary btn-sm">Edytuj</a></td>
+            <td><a th:href="@{deleteShow(id=${show.id})}" class="btn btn-secondary btn-sm">Usuń</a></td>
         </tr>
         </tbody>
     </table>

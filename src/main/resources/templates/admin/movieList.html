@@ -12,9 +12,10 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Tytuł</th>
-            <th scope="col">Reżyser</th>
             <th scope="col">Plakat</th>
+            <th scope="col">Tytył</th>
+            <th scope="col">Reżyser</th>
+
             <th scope="col" class="text-right">Edytuj / Usuń</th>
 
         </tr>
@@ -24,9 +25,12 @@
             <td colspan="6" scope="row" class="text-center">Brak filmów.</td>
         </tr>
         <tr th:if="${!movieList.isEmpty()}" th:each="movie : ${movieList}">
+            <div class="plakaty">
+                <td class="align-middle"><img th:src="@{${movie.poster}}" th:width="70"></td>
+            </div>
             <td scope="row" class="align-middle" th:text="${movie.name}"></td>
             <td class="align-middle" th:text="${movie.director}"></td>
-            <td class="align-middle" th:text="${movie.poster}"></td>
+
             <td class="text-right">
                 <a th:href="@{movieForm(id=${movie.id})}" class="btn btn-secondary btn-sm">Edytuj</a>
                 <a th:href="@{deleteMovie(id=${movie.id})}" class="btn btn-danger btn-sm">Usuń</a>

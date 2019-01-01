@@ -12,8 +12,8 @@
     <form th:action="@{/admin/showForm}" th:object="${show}" method="post">
         <input type="hidden" th:field="*{id}" />
         <div class="form-group">
-            <label for="screeningTime">Data seansu: </label>
-            <input type="datetime-local" class="form-control" id="screeningTime" th:field="*{date}">
+            <label for="date">Data seansu: </label>
+            <input type="datetime-local" class="form-control" id="date" th:field="*{date}">
             <div class="alert alert-danger my-3" role="alert" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
         </div>
         <section class="mb-2">
