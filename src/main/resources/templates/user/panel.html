@@ -2,20 +2,19 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Panel administratora</title>
+    <title>Panel użytkownika</title>
     <th:block th:include="fragments/general :: headerFiles"></th:block>
 </head>
 <body>
 <!--<header th:replace="fragments/header :: header(adminPanel)"></header>-->
-<header th:replace="fragments/header :: header(adminPanel) "></header>
+<header th:replace="fragments/header :: header(userPanel)"></header>
 
 <div class="container">
+    <a href="/user/buyTicket">Kupione bilety</a>
+    <br>
+    <a href="/user/reservationTicket">Rezerwacje biletów</a>
+    <br>
 
-    <a href="/admin/typeMovieList"  >Lista gatunków</a><br>
-    <a href="/admin/movieList">Lista filmów</a><br>
-    <a href="/admin/typeTicketList">Lista rodzjaów biletów</a><br>
-    <a href="/admin/priceList">Lista cen biletów</a><br>
-    <a href="/admin/showList">Lista seansów</a><br>
 
 
 </div>

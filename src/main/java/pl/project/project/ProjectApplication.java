@@ -6,10 +6,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 @SpringBootApplication
 public class ProjectApplication {
 
+
+//	public void addViewControllers(ViewControllerRegistry registry) {
+//		registry.addViewController("/login").setViewName("login");
+//	}
 	/**
 	 * do stworzenia własnych wiadomości;  usuwa komunikaty z pakietów zasobów dla różnych ustawień np NoBlank (domyślnych??)
 	 *

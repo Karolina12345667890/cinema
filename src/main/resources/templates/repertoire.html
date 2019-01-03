@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Repertuar</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(activeTab = 'repertoire', activeAdmintab = '')"></header>
+<div class="container">
+    <h2 class="mb-4">Repertuar</h2>
+
+    <div class="mb-4 mx-3">
+        <th:block th:each="weekDay : ${nextWeekDates}">
+            <a th:href="@{repertuar(date=${#dates.format(weekDay, 'yyyy-MM-dd')})}" th:text="${#dates.format(weekDay, 'dd-MM-yyyy')}"></a>
+        </th:block>
+    </div>
+
+    <table class="table table-hover col-10">
+        <thead>
+        <tr>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Godziny seansów</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${movieShowMap.isEmpty()}">
+            <td colspan="2" scope="row" class="text-center">Brak seansów.</td>
+        </tr>
+        <tr th:if="${!movieShowMap.isEmpty()}" th:each="msMap : ${movieShowMap}">
+            <!--klucz -> nazwa filmu, wartość -> data-->
+            <td scope="row" class="align-middle" th:text="${msMap.getKey().name}"></td>
+            <td class="align-middle">
+                <th:block th:each="showList : ${msMap.getValue()}">
+                    <a href="#" th:href="@{reservedSeatList(id=${showList.id})}" th:text="${#dates.format(showList.timeShow, 'HH:mm')}"></a>
+                </th:block>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

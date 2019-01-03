@@ -13,7 +13,7 @@
         <div class="form-group">
             <label for="typeTicketName">Nazwa: </label>
             <input type="text" class="form-control" id="typeTicketName" th:field="*{name}">
-            <div class="alert alert-danger my-3" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            <div class="alert alert-danger my-3" role="alert" th:if="${#fields.hasErrors('username')}" th:errors="*{name}"></div>
         </div>
         <button type="submit" class="btn btn-primary">Zapisz</button>
     </form>

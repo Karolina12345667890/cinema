@@ -11,7 +11,7 @@
 	<groupId>pl.project</groupId>
 	<artifactId>project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>project</name>
+	<username>project</username>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

@@ -12,9 +12,9 @@
     <form th:action="@{/admin/showForm}" th:object="${show}" method="post">
         <input type="hidden" th:field="*{id}" />
         <div class="form-group">
-            <label for="date">Data seansu: </label>
-            <input type="datetime-local" class="form-control" id="date" th:field="*{date}">
-            <div class="alert alert-danger my-3" role="alert" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+            <label for="timeShow">Data seansu: </label>
+            <input type="datetime-local" class="form-control" id="timeShow" th:field="*{timeShow}">
+            <div class="alert alert-danger my-3" role="alert" th:if="${#fields.hasErrors('timeShow')}" th:errors="*{timeShow}"></div>
         </div>
         <section class="mb-2">
             <header class=" d-flex justify-content-between border-bottom mb-2">

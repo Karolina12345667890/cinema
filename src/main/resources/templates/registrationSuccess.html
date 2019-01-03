@@ -7,17 +7,16 @@
 </head>
 <body>
 <!--<header th:replace="fragments/header :: header(adminPanel)"></header>-->
-<header th:replace="fragments/header :: header(adminPanel) "></header>
+<header th:replace="fragments/header :: header(activeTab = 'registrationSuccess', activeAdmintab = '')"></header>
 
 <div class="container">
-
-    <a href="/admin/typeMovieList"  >Lista gatunków</a><br>
-    <a href="/admin/movieList">Lista filmów</a><br>
-    <a href="/admin/typeTicketList">Lista rodzjaów biletów</a><br>
-    <a href="/admin/priceList">Lista cen biletów</a><br>
-    <a href="/admin/showList">Lista seansów</a><br>
-
-
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 ">
+            <h1>Właśnie zostałeś zarejestrowany w systemie!</h1>
+            Twoje konto nie jest jeszcze aktywne (flaga w bazie enabled=false),<br/>
+            Po aktywacji konta możesz się  <a href="/login">zalogować</a>
+        </div>
+    </div>
 </div>
 
 <footer th:replace="fragments/footer :: footer"></footer>

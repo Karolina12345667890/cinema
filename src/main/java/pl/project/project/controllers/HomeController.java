@@ -11,6 +11,10 @@ public class HomeController {
     public String showIndex(){
         return "index";
     }
+    @RequestMapping(value = {"/admin/id"}, method = RequestMethod.GET)
+    public String showId(){
+        return "admin/id";
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String showLogin(){
@@ -21,4 +25,6 @@ public class HomeController {
     public String showAdminPanel(){
         return "admin/panel";
     }
+
+
 }

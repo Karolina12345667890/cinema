@@ -22,19 +22,23 @@
                 <li class="nav-item" th:class="${activeTab == 'index'}?'active': null">
                     <a class="nav-link" href="/index">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" th:class="${activeTab == 'screenings'}?'active': null">
+                <li class="nav-item" th:class="${activeTab == 'repertoire'}?'active': null">
                     <a class="nav-link" href="/repertuar">Repertuar</a>
                 </li>
-                <li class="nav-item" th:class="${activeTab == 'pricing'}?'active': null">
-                    <a class="nav-link" href="#">Cennik</a>
+                <li class="nav-item" th:class="${activeTab == 'admin/priceList'}?'active': null">
+                    <a class="nav-link" href="/admin/priceList">Cennik</a>
                 </li>
+                <li class="nav-item" th:class="${activeTab == 'reg'}?'active': null">
+                    <a class="nav-link" href="/registrationFrom">Rejestracja</a>
+                </li>
+                <!--<li class="nav-item" th:class="${activeTab == 'id'}?'active': null">-->
+                    <!--<a class="nav-link" href="/id">id</a>-->
+                <!--</li>-->
 
-                <li class="nav-item" th:class="${activeTab == 'adminPanel'}?'active': null" sec:authorize="hasRole('ROLE_ADMIN')">
+                <li class="nav-item" th:class="${activeTab == 'adminPanel'}?'active': null" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link" href="/admin/panel">Panel</a>
                 </li>
-
             </ul>
-
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" th:class="${activeTab == 'login'}?'active': null" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="login">Zaloguj</a>

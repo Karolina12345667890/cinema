@@ -6,7 +6,7 @@
     <th:block th:include="fragments/general :: headerFiles"></th:block>
 </head>
 <body>
-<header th:replace="fragments/header :: header(adminPanel)"></header>
+<header th:replace="fragments/header :: header(userPanel)"></header>
 <div class="container">
     <h2 class="mb-4">Lista filmów</h2>
     <table class="table table-hover">
@@ -14,10 +14,7 @@
         <tr>
             <th scope="col">Cena</th>
             <th scope="col">Typ Biletu</th>
-            <div sec:authorize="hasRole('ADMIN')">
-                <th scope="col" class="text-right">Edytuj / Usuń</th>
-            </div>
-
+            <th scope="col" class="text-right">Edytuj / Usuń</th>
 
         </tr>
         </thead>
@@ -27,26 +24,16 @@
         </tr>
         <tr th:if="${!priceList.isEmpty()}" th:each="price : ${priceList}">
             <td scope="row" class="align-middle" th:text="${price.price}"></td>
-            <td scope="row" class="align-middle" th:text="${price.typeTicket.name}"></td>
-
-            <!--<td class="align-middle" th:if="${price.type_ticket_id.equals(typeTicket.id)}" th:text="${price.username}"></td>-->
-
-            <div sec:authorize="hasRole('ADMIN')">
-                <td class="text-right">
-                    <a th:href="@{priceForm(id=${price.id})}" class="btn btn-secondary btn-sm">Edytuj</a>
-                    <a th:href="@{deletePrice(id=${price.id})}" class="btn btn-danger btn-sm">Usuń</a>
-                </td>
-            </div>
+            <td scope="row" class="align-middle" th:text="${price.typeTicket.username}"></td>
 
         </tr>
         <!--<td th:if="${!typeTicketList.isEmpty()}" th:each="type : ${typeTicketList}">-->
-            <!--<td scope="row" class="align-middle" th:text="${type.username}"></td>-->
+        <!--<td scope="row" class="align-middle" th:text="${type.username}"></td>-->
         <!--</td>-->
         </tbody>
     </table>
-<div sec:authorize="hasRole('ADMIN')">
+
     <a href="/admin/priceForm" class="btn btn-primary">Dodaj</a>
-</div>
 </div>
 <footer th:replace="fragments/footer :: footer"></footer>
 <th:block th:include="fragments/general :: scripts"></th:block>

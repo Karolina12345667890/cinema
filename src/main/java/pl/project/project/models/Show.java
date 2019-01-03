@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,7 @@ public class Show {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd' 'HH:mm")
     @Future
-    private Calendar date;
+    private Date timeShow;
 
     @ManyToOne
     @JoinColumn(name = "movies_id")
@@ -33,8 +34,8 @@ public class Show {
     public Show() {
     }
 
-    public Show( Calendar date, Movie movie, Hall hall, Set<ReservationSeat> reservationSeats) {
-        this.date = date;
+    public Show( Date timeShow, Movie movie, Hall hall, Set<ReservationSeat> reservationSeats) {
+        this.timeShow = timeShow;
         this.movie = movie;
         this.hall = hall;
         this.reservationSeats = reservationSeats;
@@ -64,12 +65,12 @@ public class Show {
         this.reservationSeats = reservationSeats;
     }
 
-    public Calendar getDate() {
-        return date;
+    public Date getTimeShow() {
+        return timeShow;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setTimeShow(Date timeShow) {
+        this.timeShow = timeShow;
     }
 
     public int getId() {

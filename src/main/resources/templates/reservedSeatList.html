@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List gatunków</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(activeTab = 'reservedSeat', activeAdmintab = '')"></header>
+<div class="container">
+    <h2 class="mb-4">Lista filmów</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col"> Rząd</th>
+            <th scope="col"> Miejsce</th>
+            <th scope="col"> Czy zajęte</th>
+            <th scope="col"> Rezerwuj</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${reservedSeatList.isEmpty()}">
+            <td colspan="6" scope="row" class="text-center">Brak miejsc do wyświetlenia.</td>
+        </tr>
+        <div th:if="${!reservedSeatList.isEmpty()}" th:each="reservedSeat : ${reservedSeatList}">
+            <tr>
+               <td  scope="row" class="align-middle" th:text="${reservedSeat.row}"></td>
+                <td  scope="row" class="align-middle" th:text="${reservedSeat.seat}"></td>
+                <td  scope="row" class="align-middle" th:text="${reservedSeat.reserved}"></td>
+                <td><a th:href="@{reservedSeatList(id=${reservedSeat.id})}" class="btn btn-secondary btn-sm">Rezerwuj</a></td>
+            </tr>
+
+
+        </div>
+
+
+        </tbody>
+    </table>
+
+    <!--<a href="/admin/priceForm" class="btn btn-primary">Dodaj</a>-->
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

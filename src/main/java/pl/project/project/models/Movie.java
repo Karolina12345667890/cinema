@@ -28,7 +28,17 @@ public class Movie {
     private Set<TypeMovie> typeMovie;
     @NotBlank
     private String description;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private Set<Show> shows;
 
+    public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, @Length(min = 3, max = 50000) String poster, Set<TypeMovie> typeMovie, @NotBlank String description, Set<Show> shows) {
+        this.name = name;
+        this.director = director;
+        this.poster = poster;
+        this.typeMovie = typeMovie;
+        this.description = description;
+        this.shows = shows;
+    }
 
     public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, String poster, Set<TypeMovie> typeMovie, @NotBlank String description) {
         this.name = name;
@@ -36,6 +46,14 @@ public class Movie {
         this.poster = poster;
         this.typeMovie = typeMovie;
         this.description = description;
+    }
+
+    public Set<Show> getShows() {
+        return shows;
+    }
+
+    public void setShows(Set<Show> shows) {
+        this.shows = shows;
     }
 
     public Movie()
