@@ -109,11 +109,8 @@ public class RepositoriesIntializer {
 
 
                 Hall h1 = hallRepository.save(new Hall("1", 25, new HashSet<>(), new HashSet<>()));
-                Hall h2 = hallRepository.save(new Hall("2", 100, new HashSet<>(), new HashSet<>()));
-                Hall h3 = hallRepository.save(new Hall("3", 100, new HashSet<>(), new HashSet<>()));
-                Hall h4 = hallRepository.save(new Hall("4", 100, new HashSet<>(), new HashSet<>()));
-                Hall h5 = hallRepository.save(new Hall("5", 100, new HashSet<>(), new HashSet<>()));
-                Hall h6 = hallRepository.save(new Hall("6", 100, new HashSet<>(), new HashSet<>()));
+                Hall h2 = hallRepository.save(new Hall("2", 25, new HashSet<>(), new HashSet<>()));
+                Hall h3 = hallRepository.save(new Hall("3", 25, new HashSet<>(), new HashSet<>()));
 
 //                Calendar c= Calendar.getInstance();
 //                Calendar c1= Calendar.getInstance();
@@ -134,41 +131,41 @@ public class RepositoriesIntializer {
                 Show s3 = showRepository.save(new Show(new Date(2019,12,16,15,45),m1,h1,new HashSet<>()));
 
 
-                Seat ss1 = seatRepository.save(new Seat(h1,1,1,1,false,new HashSet<>()));
-                Seat ss2 = seatRepository.save(new Seat(h1,1,2,1,false,new HashSet<>()));
-                Seat ss3 = seatRepository.save(new Seat(h1,1,3,1,false,new HashSet<>()));
-                Seat ss4 = seatRepository.save(new Seat(h1,1,4,1,false,new HashSet<>()));
-                Seat ss5 = seatRepository.save(new Seat(h1,1,5,1,false,new HashSet<>()));
+                Seat ss1 = seatRepository.save(new Seat(h1,1,1,new HashSet<>()));
+                Seat ss2 = seatRepository.save(new Seat(h1,2,1,new HashSet<>()));
+                Seat ss3 = seatRepository.save(new Seat(h1,3,1,new HashSet<>()));
+                Seat ss4 = seatRepository.save(new Seat(h1,4,1,new HashSet<>()));
+                Seat ss5 = seatRepository.save(new Seat(h1,5,1,new HashSet<>()));
 
-                Seat ss6 = seatRepository.save(new Seat(h1,2,1,2,false,new HashSet<>()));
-                Seat ss7 = seatRepository.save(new Seat(h1,2,2,2,false,new HashSet<>()));
-                Seat ss8 = seatRepository.save(new Seat(h1,2,3,2,false,new HashSet<>()));
-                Seat ss9 = seatRepository.save(new Seat(h1,2,4,2,false,new HashSet<>()));
-                Seat ss10 = seatRepository.save(new Seat(h1,2,4,2,false,new HashSet<>()));
+                Seat ss6 = seatRepository.save(new Seat(h1,1,2,new HashSet<>()));
+                Seat ss7 = seatRepository.save(new Seat(h1,2,2,new HashSet<>()));
+                Seat ss8 = seatRepository.save(new Seat(h1,3,2,new HashSet<>()));
+                Seat ss9 = seatRepository.save(new Seat(h1,4,2,new HashSet<>()));
+                Seat ss10 = seatRepository.save(new Seat(h1,5,2,new HashSet<>()));
 
-                Seat ss11 = seatRepository.save(new Seat(h1,3,1,3,false,new HashSet<>()));
-                Seat ss12 = seatRepository.save(new Seat(h1,3,2,3,false,new HashSet<>()));
-                Seat ss13 = seatRepository.save(new Seat(h1,3,3,3,false,new HashSet<>()));
-                Seat ss14 = seatRepository.save(new Seat(h1,3,4,3,false,new HashSet<>()));
-                Seat ss15 = seatRepository.save(new Seat(h1,3,5,3,false,new HashSet<>()));
+                Seat ss11 = seatRepository.save(new Seat(h1,1,3,new HashSet<>()));
+                Seat ss12 = seatRepository.save(new Seat(h1,2,3,new HashSet<>()));
+                Seat ss13 = seatRepository.save(new Seat(h1,3,3,new HashSet<>()));
+                Seat ss14 = seatRepository.save(new Seat(h1,4,3,new HashSet<>()));
+                Seat ss15 = seatRepository.save(new Seat(h1,5,3,new HashSet<>()));
 
-                Seat ss16 = seatRepository.save(new Seat(h1,4,1,4,false,new HashSet<>()));
-                Seat ss17 = seatRepository.save(new Seat(h1,4,2,4,false,new HashSet<>()));
-                Seat ss18 = seatRepository.save(new Seat(h1,4,3,4,false,new HashSet<>()));
-                Seat ss19 = seatRepository.save(new Seat(h1,4,4,4,false,new HashSet<>()));
-                Seat ss20 = seatRepository.save(new Seat(h1,4,5,4,false,new HashSet<>()));
+                Seat ss16 = seatRepository.save(new Seat(h1,1,4,new HashSet<>()));
+                Seat ss17 = seatRepository.save(new Seat(h1,2,4,new HashSet<>()));
+                Seat ss18 = seatRepository.save(new Seat(h1,3,4,new HashSet<>()));
+                Seat ss19 = seatRepository.save(new Seat(h1,4,4,new HashSet<>()));
+                Seat ss20 = seatRepository.save(new Seat(h1,5,4,new HashSet<>()));
 
-                Seat ss21 = seatRepository.save(new Seat(h1,5,1,5,false,new HashSet<>()));
-                Seat ss22 = seatRepository.save(new Seat(h1,5,2,5,false,new HashSet<>()));
-                Seat ss23 = seatRepository.save(new Seat(h1,5,3,5,false,new HashSet<>()));
-                Seat ss24 = seatRepository.save(new Seat(h1,5,4,5,false,new HashSet<>()));
-                Seat ss25 = seatRepository.save(new Seat(h1,5,5,5,false,new HashSet<>()));
+                Seat ss21 = seatRepository.save(new Seat(h1,1,5,new HashSet<>()));
+                Seat ss22 = seatRepository.save(new Seat(h1,2,5,new HashSet<>()));
+                Seat ss23 = seatRepository.save(new Seat(h1,3,5,new HashSet<>()));
+                Seat ss24 = seatRepository.save(new Seat(h1,4,5,new HashSet<>()));
+                Seat ss25 = seatRepository.save(new Seat(h1,5,5,new HashSet<>()));
 
 
 
 
             }
-            if(roleRepository.findAll().isEmpty() == true){
+            if(roleRepository.findAll().isEmpty()){
                 try {
                     Role roleUser = roleRepository.save(new Role(Role.Types.ROLE_USER));
                     Role roleAdmin = roleRepository.save(new Role(Role.Types.ROLE_ADMIN));

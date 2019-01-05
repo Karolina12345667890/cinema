@@ -19,8 +19,10 @@
     <table class="table table-hover col-10">
         <thead>
         <tr>
+            <th>Plakat</th>
             <th scope="col">Tytuł</th>
             <th scope="col">Godziny seansów</th>
+            <th scope="col">Rezerwuj miejsce</th>
         </tr>
         </thead>
         <tbody>
@@ -29,10 +31,26 @@
         </tr>
         <tr th:if="${!movieShowMap.isEmpty()}" th:each="msMap : ${movieShowMap}">
             <!--klucz -> nazwa filmu, wartość -> data-->
+
+            <div th:each="movie : ${moviePoster}">
+                <div th:if="${movie.name} == ${msMap.getKey().name}">
+                    <td scope="row" class="align-middle"><img th:src="@{${movie.poster}}" th:width="70"></td>
+                </div>
+
+            </div>
+
             <td scope="row" class="align-middle" th:text="${msMap.getKey().name}"></td>
+
+
+
             <td class="align-middle">
                 <th:block th:each="showList : ${msMap.getValue()}">
-                    <a href="#" th:href="@{reservedSeatList(id=${showList.id})}" th:text="${#dates.format(showList.timeShow, 'HH:mm')}"></a>
+                    <label type="datetime-local" th:text="${#dates.format(showList.timeShow, 'HH:mm')}"></label>
+                </th:block>
+            </td>
+            <td class="align-middle">
+                <th:block th:each="showList : ${msMap.getValue()}">
+                    <a th:href="@{reservedSeatForm(id=${showList.id})}" class="btn btn-secondary btn-sm" th:text="Rezerwuj"></a>
                 </th:block>
             </td>
         </tr>

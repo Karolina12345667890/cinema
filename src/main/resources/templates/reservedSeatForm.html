@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dodaj/Edytuj film</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+
+<header th:replace="fragments/header :: header(activeTab = 'reserved', activeAdmintab = '')"></header>
+<div class="container">
+
+    <div class="container">
+        <div th:text="${show.movie.name}"></div>
+        <div th:text="${#dates.format(show.timeShow, 'yyyy-MM-dd')}"></div>
+        <div th:text="${#dates.format(show.timeShow, 'HH:mm')}"></div>
+
+        <form th:action="@{/reservedSeatForm}" th:object="${show}" method="post">
+            <div>EKRAN</div>
+            <form>
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{hall}">
+                <div th:each="row : ${seats}">
+                    <div class="d-inline-flex form-check" th:each="seat : ${row.getValue()}">
+                        <input type="checkbox" class="" th:field="*{listOfReservedSeats}" th:value="${seat.row + '-' + seat.seat}" th:disabled="${listOfResSeats.contains(seat.row + '-' + seat.seat) ? true : false}">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+            </form>
+        </form>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

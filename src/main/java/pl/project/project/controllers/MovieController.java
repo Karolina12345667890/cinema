@@ -64,4 +64,12 @@ public class MovieController {
         }
         return "redirect:movieList";
     }
+
+    @RequestMapping(value = "/admin/movieDetails", method = RequestMethod.GET)
+    public String showMovieDetails(Model model, @RequestParam(name = "id" , required = false, defaultValue = "-1") Integer id)
+    {
+        model.addAttribute("typeMovie",typeMovieRepository.findAll());
+        model.addAttribute("movieListDetails", movieRepository.findById(id).get());
+        return "admin/movieDetails";
+    }
 }

@@ -28,7 +28,8 @@
             <div class="plakaty">
                 <td class="align-middle"><img th:src="@{${movie.poster}}" th:width="70"></td>
             </div>
-            <td scope="row" class="align-middle" th:text="${movie.name}"></td>
+            <td scope="row" class="align-middle">
+                <a th:href="@{movieDetails(id=${movie.id})}" th:text="${movie.name}"></a></td>
             <td class="align-middle" th:text="${movie.director}"></td>
 
             <td class="text-right">

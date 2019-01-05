@@ -8,18 +8,16 @@ public class ReservationSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @ManyToOne
     @JoinColumn(name = "show_id")
     private Show show;
-
     @ManyToOne
     @JoinColumn(name = "seat_id")
     private Seat seat;
-
     @ManyToOne
     @JoinColumn(name = "reservations_id")
     private Reservation reservation;
+
 
     public ReservationSeat(Show show, Seat seat, Reservation reservation) {
         this.show = show;
@@ -29,6 +27,7 @@ public class ReservationSeat {
 
     public ReservationSeat() {
     }
+
 
     public int getId() {
         return id;

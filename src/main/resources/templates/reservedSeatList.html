@@ -27,7 +27,7 @@
                <td  scope="row" class="align-middle" th:text="${reservedSeat.row}"></td>
                 <td  scope="row" class="align-middle" th:text="${reservedSeat.seat}"></td>
                 <td  scope="row" class="align-middle" th:text="${reservedSeat.reserved}"></td>
-                <td><a th:href="@{reservedSeatList(id=${reservedSeat.id})}" class="btn btn-secondary btn-sm">Rezerwuj</a></td>
+                <td><a th:href="@{seatForm(id=${reservedSeat.id})}" class="btn btn-secondary btn-sm">Rezerwuj</a></td>
             </tr>
 
 

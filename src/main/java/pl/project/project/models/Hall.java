@@ -1,6 +1,7 @@
 package pl.project.project.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,6 +17,8 @@ import java.util.Set;
         private Set<Show> shows;
         @OneToMany(mappedBy = "hall")
         private Set<Seat> seats;
+        @Transient
+        private List<String> listOfSeats;
 
         public Hall(String name, int seatNumber, Set<Show> shows, Set<Seat> seats) {
             this.name = name;
@@ -25,6 +28,14 @@ import java.util.Set;
         }
 
         public Hall() {
+        }
+
+        public List<String> getListOfSeats() {
+            return listOfSeats;
+        }
+
+        public void setListOfSeats(List<String> listOfSeats) {
+            this.listOfSeats = listOfSeats;
         }
 
         public int getId() {

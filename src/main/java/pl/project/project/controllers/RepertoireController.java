@@ -25,6 +25,7 @@ public class RepertoireController {
 
     @RequestMapping(value = "/repertuar", method = RequestMethod.GET)
     public String showRepertoire(Model model, @RequestParam(name = "date", required = false, defaultValue = "-1") String date){
+        model.addAttribute("moviePoster",movieRepository.findAll());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate now;
 

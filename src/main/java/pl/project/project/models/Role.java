@@ -3,6 +3,7 @@ package pl.project.project.models;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,9 +18,18 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public Role(Types type){
+    public Role(Types type) {
         this.type = type;
+        this.users = new HashSet<>();
     }
+
+    public Role(Types type, Set<User> users) {
+        this.type = type;
+        this.users = users;
+    }
+//    public Role(Types type){
+//        this.type = type;
+//    }
 
     public Integer getId() {
         return id;

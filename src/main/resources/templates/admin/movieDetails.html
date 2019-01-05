@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List gatunków</title>
+    <th:block th:include="fragments/general :: headerFiles"></th:block>
+</head>
+<body>
+<header th:replace="fragments/header :: header(adminPanel)"></header>
+<div class="container">
+
+
+ <div th:each="movie : ${movieListDetails}">
+     <!--<label>Plakat:</label>-->
+     <img th:src="@{${movie.poster}}" th:width="100">
+     <br><br>
+     <h4>Tytuł filmu: </h4>
+         <label th:text="${movie.name}"></label><br>
+     <h4>Reżyser: </h4>
+     <div th:text="${movie.director}"></div>
+     <h4>Opis: </h4>
+     <div th:text="${movie.description}"></div>
+</div>
+<br><br><br><br>
+    <a href="/admin/movieList" class="btn btn-primary">Wróć</a>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<th:block th:include="fragments/general :: scripts"></th:block>
+</body>
+</html>

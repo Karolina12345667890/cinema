@@ -17,27 +17,30 @@ public class User {
     //@UniqueUsername
     @Length(min = 2, max = 15)
     private String username;
+
     private String password;
+
     private int acount;
+
     @Transient//pole nie będzie odwzorowane w db
     private String passwordConfirm;
+
     private boolean enabled = false;
 
-//    public User(@Length(min = 2, max = 15) String name, @Length(min = 2, max = 10) String password, int acount, boolean enabled) {
-//        this.username = name;
-//        this.password = password;
-//        this.acount = acount;
-//        this.enabled = enabled;
-//    }
-@AssertTrue
-private boolean isPasswordsEquals(){
-    return password == null || passwordConfirm == null || password.equals(passwordConfirm);
-}
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Reservation> reservations;
+
+@AssertTrue
+private boolean isPasswordsEquals(){
+    return password == null || passwordConfirm == null || password.equals(passwordConfirm);
+}
+
 
     public User(String username){
         this(username, false);
@@ -47,10 +50,6 @@ private boolean isPasswordsEquals(){
         this.username = username;
         this.enabled = enabled;
     }
-
-
-//    public User() {
-//    }
 
 
     public int getAcount() {
@@ -109,11 +108,4 @@ private boolean isPasswordsEquals(){
         this.password = password;
     }
 
-//    public int getAcount() {
-//        return acount;
-//    }
-//
-//    public void setAcount(int acount) {
-//        this.acount = acount;
-//    }
 }

@@ -17,7 +17,7 @@
         </div>
         <div class="form-check" th:each="typeTicket : ${typeTicketList}">
             <input type="checkbox" class="form-check-input" th:field="*{typeTicket}" th:value="${typeTicket.id}">
-            <label class="form-check-label" th:for="${#ids.prev('typeTicket')}" th:text="#{${typeTicket.name}}"></label>
+            <label class="form-check-label" th:for="${#ids.prev('typeTicket')}" th:text="#{${typeTicket.username}}"></label>
         </div>
         <button type="submit" class="btn btn-primary">Zapisz</button>
     </form>
