@@ -8,6 +8,28 @@
 <body>
 <header th:replace="fragments/header :: header(adminPanel)"></header>
 <div class="container">
+
+
+        <form th:action="@{/admin/movieList}" th:object="${searchCommand}" method="post">
+            <fieldset>
+                <h1>Wyszukaj: </h1>
+                <div class="form-group">
+                    <label for="movieTitle">Tytuł: </label>
+                    <input type="text" class="form-control" id="movieTitle" th:field="*{phrase}">
+                </div>
+                <div class="form-group">
+                    <label for="director">Reżyser: </label>
+                    <input type="text" class="form-control" id="director" th:field="*{directoryFilter}">
+                </div>
+                <div class="form-group">
+                    <label for="country">Kraj: </label>
+                    <input type="text" class="form-control" id="country" th:field="*{countryFilter}">
+                </div>
+                <button type="submit" class="btn btn-primary">Wyszukaj</button>
+            </fieldset>
+        </form>
+
+
     <h2 class="mb-4">Lista filmów</h2>
     <table class="table table-hover">
         <thead>
@@ -24,7 +46,9 @@
         <tr th:if="${movieList.isEmpty()}">
             <td colspan="6" scope="row" class="text-center">Brak filmów.</td>
         </tr>
-        <tr th:if="${!movieList.isEmpty()}" th:each="movie : ${movieList}">
+        <tr th:each="movie, iStat : ${moviePage.content}"
+            th:style="${iStat.odd}? 'font-weight: bold'"
+            th:alt-title="${iStat.even}? 'even' : 'odd'">
             <div class="plakaty">
                 <td class="align-middle"><img th:src="@{${movie.poster}}" th:width="70"></td>
             </div>
@@ -39,8 +63,15 @@
         </tr>
         </tbody>
     </table>
-
-    <a href="/admin/movieForm" class="btn btn-primary">Dodaj</a>
+    <div th:if="${moviePage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/admin/movieList(size=${moviePage.size}, page=${pageNumber -1})}"
+           th:text="${pageNumber}"
+           th:class="${pageNumber==moviePage.number } ? active"></a>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">
+         <a href="/admin/movieForm" class="btn btn-primary">Dodaj</a>
+    </div>
 </div>
 <footer th:replace="fragments/footer :: footer"></footer>
 <th:block th:include="fragments/general :: scripts"></th:block>

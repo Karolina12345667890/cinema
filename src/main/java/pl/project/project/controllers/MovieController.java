@@ -1,22 +1,28 @@
 package pl.project.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import pl.project.project.models.Movie;
 import pl.project.project.models.TypeMovie;
 import pl.project.project.repositories.MovieRepository;
 import pl.project.project.repositories.TypeMovieRepository;
+import pl.project.project.services.MovieService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+@SessionAttributes("searchCommand")
 @Controller
 public class MovieController {
 
@@ -25,15 +31,45 @@ public class MovieController {
     @Autowired
     TypeMovieRepository typeMovieRepository;
 
+    @Autowired
+    private MovieService movieService;
+
     @ModelAttribute("typeMovieList")
     public List<TypeMovie> loadTypeMovie(){
         List<TypeMovie> typeMovies = typeMovieRepository.findAll();
         return typeMovies;
     }
 
-    @RequestMapping(value = "/admin/movieList", method = RequestMethod.GET)
-    public String showMovieList(Model model){
+    @ModelAttribute("searchCommand")
+    public FilterController getSimpleSearch(){
+        return new FilterController();
+    }
+
+    @GetMapping(value="/admin/movieList.html", params = {"all"})
+    public String resetehicleList(@ModelAttribute("searchCommand") FilterController search){
+        search.clear();
+        return "redirect:admin/movieList.html";
+    }
+
+    @RequestMapping(value = "/admin/movieList", method = {RequestMethod.GET, RequestMethod.POST})
+    public String showMovieList(Model model, @RequestParam("page")Optional<Integer> page,
+                                @RequestParam("size") Optional<Integer> size,@Valid @ModelAttribute("searchCommand") FilterController search){
+
         model.addAttribute("movieList", movieRepository.findAll());
+        int currentPage = page.orElse(0);
+        int pageSize = size.orElse(2);
+        Page<Movie> moviePage = movieService.findPagined(PageRequest.of(currentPage,pageSize),search);
+//        Page<Movie> moviePage = movieService.findPagined(PageRequest.of(currentPage,pageSize));
+        model.addAttribute("moviePage",moviePage);
+
+        int totalPages = moviePage.getTotalPages();
+        if(totalPages > 0)
+        {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "admin/movieList";
     }
 

@@ -20,6 +20,10 @@
      <div th:text="${movie.director}"></div>
      <h4>Opis: </h4>
      <div th:text="${movie.description}"></div>
+     <h4>Kraj produkcji: </h4>
+     <div th:text="${movie.country}"></div>
+     <h4>Więcej o filmie na stronie: </h4>
+     <a th:href="@{${movie.adnotation}}" th:text="${movie.adnotation}"></a>
 </div>
 <br><br><br><br>
     <a href="/admin/movieList" class="btn btn-primary">Wróć</a>

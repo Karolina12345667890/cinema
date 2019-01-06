@@ -30,22 +30,46 @@ public class Movie {
     private String description;
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private Set<Show> shows;
+    @NotBlank
+    @Length(max = 30)
+    private String country;
+    @NotBlank
+    @Length(max = 50)
+    private String adnotation;
 
-    public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, @Length(min = 3, max = 50000) String poster, Set<TypeMovie> typeMovie, @NotBlank String description, Set<Show> shows) {
+    public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, @Length(min = 3, max = 50000) String poster, String country,String adnotation,  Set<TypeMovie> typeMovie, @NotBlank String description, Set<Show> shows) {
         this.name = name;
         this.director = director;
         this.poster = poster;
         this.typeMovie = typeMovie;
         this.description = description;
         this.shows = shows;
+        this.country = country;
+        this.adnotation = adnotation;
     }
 
-    public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, String poster, Set<TypeMovie> typeMovie, @NotBlank String description) {
-        this.name = name;
-        this.director = director;
-        this.poster = poster;
-        this.typeMovie = typeMovie;
-        this.description = description;
+//    public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, String poster, Set<TypeMovie> typeMovie, @NotBlank String description) {
+//        this.name = name;
+//        this.director = director;
+//        this.poster = poster;
+//        this.typeMovie = typeMovie;
+//        this.description = description;
+//    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getAdnotation() {
+        return adnotation;
+    }
+
+    public void setAdnotation(String adnotation) {
+        this.adnotation = adnotation;
     }
 
     public Set<Show> getShows() {

@@ -71,6 +71,8 @@ public class RepositoriesIntializer {
                         "Iron Man",
                         "Jon Favreau",
                         "https://1.allegroimg.com/s512/0352e3/3d20b15844268687254be8553ed1",
+                        "USA",
+                        "https://www.filmweb.pl/Iron.Man",
                         new HashSet<>(),
                         "Tony Stark buduje supernowoczesną zbroję. Multimiliarder postanawia walczyć ze złem jako Iron Man.",
                         new HashSet<>()));
@@ -79,6 +81,8 @@ public class RepositoriesIntializer {
                         "Avatar",
                         " James Cameron",
                         "https://ocdn.eu/pulscms-transforms/1/-huktkpTURBXy8yZGJhOWQxYmE3MTYyMjk2YWE3NWYzNDMyM2JmZTIzZC5qcGeSlQLNA8AAwsOVAgDNA8DCww",
+                        "USA",
+                        "aaa",
                         new HashSet<>(),
                         "Jake, sparaliżowany były komandos, zostaje wysłany na planetę Pandora, gdzie zaprzyjaźnia się z lokalną społecznością i postanawia jej pomóc. ",
                         new HashSet<>()));
@@ -87,6 +91,8 @@ public class RepositoriesIntializer {
                         "Aquaman",
                         "James Wan",
                         "https://ssl-gfx.filmweb.pl/po/90/85/549085/7867964.6.jpg",
+                        "Polska",
+                        "aaa",
                         new HashSet<>(),
                         "Arthur Curry niechętnie staje na czele ludu podwodnego królestwa Atlantydy. ",
                         new HashSet<>()));
@@ -95,6 +101,8 @@ public class RepositoriesIntializer {
                         "Spider-Man Uniwersum",
                         "Bob Persichetti",
                         "https://ssl-gfx.filmweb.pl/po/32/33/743233/7853929.3.jpg",
+                        "Grecja",
+                        "aaa",
                         new HashSet<>(),
                         "Miles Morales po ukąszeniu przez radioaktywnego pająka staje do walki z nikczemnym Kingpinem. Pomogą mu w tym Spider-Menowie z innych wymiarów.",
                         new HashSet<>()));
@@ -103,6 +111,8 @@ public class RepositoriesIntializer {
                         "Narodziny gwiazdy",
                         "Bradley Cooper",
                         "https://i1.fdbimg.pl/74ot3my1/540x755_pf5p2y.jpg",
+                        "Polska",
+                        "aaa",
                         new HashSet<>(),
                         "Płomienny romans między dogasającą gwiazdą muzyki country a nieznaną piosenkarką zmienia ich życie na zawsze. ",
                         new HashSet<>()));
@@ -117,7 +127,7 @@ public class RepositoriesIntializer {
 //                Calendar c2= Calendar.getInstance();
 //                c1.set(2019,5,6,12,58);
                 Show s1 = new Show();
-                s1.setTimeShow(new Date(2019,5,6,12,58));
+                s1.setTimeShow(new Date(119,1,9,12,58));
                 s1.setHall(h1);
                 s1.setMovie(m1);
                 s1.setReservationSeats(new HashSet<>());
@@ -126,9 +136,9 @@ public class RepositoriesIntializer {
 
                 //c= Calendar.getInstance();
 //                c.set(2019,4,15,15,34);
-                Show s2 = showRepository.save(new Show(new Date(2019,4,15,15,34),m1,h1,new HashSet<>()));
+                Show s2 = showRepository.save(new Show(new Date(119,1,9,11,34),m1,h1,new HashSet<>()));
 //                c2.set(2019,12,16,15,45);
-                Show s3 = showRepository.save(new Show(new Date(2019,12,16,15,45),m1,h1,new HashSet<>()));
+                Show s3 = showRepository.save(new Show(new Date(119,1,9,15,45),m1,h1,new HashSet<>()));
 
 
                 Seat ss1 = seatRepository.save(new Seat(h1,1,1,new HashSet<>()));
