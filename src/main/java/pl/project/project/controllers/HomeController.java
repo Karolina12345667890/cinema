@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String showIndex(){
-        return "index";
-    }
-    @RequestMapping(value = {"/admin/id"}, method = RequestMethod.GET)
-    public String showId(){
-        return "admin/id";
-    }
+//    @RequestMapping(value = {"/", "/admin/movieList"}, method = RequestMethod.GET)
+//    public String showIndex(){
+//        return "/admin/movieList";
+//    }
+
+//    @RequestMapping(value = {"/history"}, method = RequestMethod.GET)
+//    public String showId(){
+//        return "history";
+//    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String showLogin(){

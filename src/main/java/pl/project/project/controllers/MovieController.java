@@ -51,7 +51,7 @@ public class MovieController {
         return "redirect:admin/movieList.html";
     }
 
-    @RequestMapping(value = "/admin/movieList", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/admin/movieList", "/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String showMovieList(Model model, @RequestParam("page")Optional<Integer> page,
                                 @RequestParam("size") Optional<Integer> size,@Valid @ModelAttribute("searchCommand") FilterController search){
 

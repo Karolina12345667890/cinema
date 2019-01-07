@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/css/**", "/repertuar","/registrationFrom","/admin/movieList","/admin/priceList",
-                        "/seatForm","/registrationSuccess","/admin/movieDetails").permitAll() //do tych zasobów dostęp ma mieć każdy
+                        "/seatForm","/registrationSuccess","/admin/movieDetails","/history").permitAll() //do tych zasobów dostęp ma mieć każdy
                 .antMatchers("/admin/**").hasRole("ADMIN") // do tych zasobów dostęp ma tylko admin
                 .antMatchers("/reservedSeatForm").hasRole("USER")
                 .anyRequest()

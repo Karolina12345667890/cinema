@@ -32,6 +32,9 @@
                 <li class="nav-item" th:class="${activeTab == 'reg'}?'active': null">
                     <a class="nav-link" href="/registrationFrom">Rejestracja</a>
                 </li>
+                <li class="nav-item" th:class="${activeTab == 'reg'}?'active': null">
+                    <a class="nav-link" href="/history">Historia</a>
+                </li>
                 <li class="nav-item" th:class="${activeTab == 'adminPanel'}?'active': null" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link" href="/admin/panel">Panel</a>
                 </li>
