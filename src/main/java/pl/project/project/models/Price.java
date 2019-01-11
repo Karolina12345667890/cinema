@@ -12,12 +12,12 @@ public class Price {
     private int id;
     @Positive
     @Max(1000000)
-    private float price;
+    private Integer price;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="type_ticket_id", nullable = false)
     private TypeTicket typeTicket;
 
-    public Price(@Positive @Max(1000000) float price, TypeTicket typeTicket) {
+    public Price(@Positive @Max(1000000) Integer price, TypeTicket typeTicket) {
         this.price = price;
         this.typeTicket = typeTicket;
     }
@@ -39,7 +39,7 @@ public class Price {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

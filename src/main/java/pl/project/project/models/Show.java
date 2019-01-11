@@ -29,6 +29,8 @@ public class Show {
     private Set<ReservationSeat> reservationSeats;
     @Transient
     private List<String> listOfReservedSeats;
+    @Transient
+    private Price price;
 
     public Show() {
     }
@@ -38,6 +40,14 @@ public class Show {
         this.movie = movie;
         this.hall = hall;
         this.reservationSeats = reservationSeats;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public List<String> getListOfReservedSeats() {

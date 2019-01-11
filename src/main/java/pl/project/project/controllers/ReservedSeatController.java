@@ -31,19 +31,23 @@ public class ReservedSeatController {
     ReservationRepository reservationRepository;
     @Autowired
     ReservationSeatRepository reservationSeatRepository;
+    @Autowired
+    PriceRepository priceRepository;
+    @Autowired
+    TypeTicketRepository typeTicketRepository;
+
+    @ModelAttribute("typePriceList")
+    public List<TypeTicket> loadTypeMovie(){
+        List<TypeTicket> typeTickets = typeTicketRepository.findAll();
+        return typeTickets;
+    }
 
     @RequestMapping(value = "/reservedSeatForm", method = RequestMethod.GET)
     public String showReservationForm(Model model, @RequestParam(name = "id") Integer showId){
-//        Optional<Screening> optional = screeningRepository.findById(screeningId);
-//        if(!optional.isPresent())
-//        {
-//            System.out.println("");
-//            return "błąd";
-//            //błąd
-//        }
-//        Screening screening = optional.get();
+
         Show show = showRepository.findById(showId).get();
         Hall hall = hallRepository.findById(show.getHall().getId()).get();
+
 
         List<Seat> roomSeats = new ArrayList<>(seatRepository.findSeatByRoom(show.getHall()));
 
@@ -67,11 +71,11 @@ public class ReservedSeatController {
             seats.put(i+1, tmp);
         }
 
+        model.addAttribute("price", priceRepository.findAll());
         model.addAttribute("listOfResSeats", listOfReservedSeats);
         model.addAttribute("show", show);
         model.addAttribute("seats", seats);
         model.addAttribute("reservation", new Reservation());
-
         return "reservedSeatForm";
     }
 
@@ -82,7 +86,7 @@ public class ReservedSeatController {
         }
 
         List<ReservationSeat> roomSeats = new ArrayList<>(reservationSeatRepository.findReservedSeatByScreening(show));
-
+        Price price = show.getPrice();
         List<String> listOfSeats = new ArrayList<>();
         for (ReservationSeat rs : roomSeats){
             listOfSeats.add(rs.getSeat().getRow() + "-" + rs.getSeat().getSeat());
@@ -109,7 +113,7 @@ public class ReservedSeatController {
                 String[] parts = s.split("-");
                 Seat seat = seatRepository.findSeatByRoomAndSeat(show.getHall(), Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
                 reservationSeatRepository.save(
-                        new ReservationSeat( show,seat,reservation));
+                        new ReservationSeat( show,seat,reservation,price));
             }
         }
 

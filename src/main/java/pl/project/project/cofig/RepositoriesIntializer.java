@@ -61,10 +61,10 @@ public class RepositoriesIntializer {
                 TypeTicket t4 = typeTicketRepository.save(new TypeTicket("dla seniora"));
 
 
-                Price p1 = priceRepository.save(new Price(12.50f,t1));
-                Price p2 = priceRepository.save(new Price(13.50f,t2));
-                Price p3 = priceRepository.save(new Price(14.50f,t3));
-                Price p4 = priceRepository.save(new Price(15.50f,t4));
+                Price p1 = priceRepository.save(new Price(12,t1));
+                Price p2 = priceRepository.save(new Price(13,t2));
+                Price p3 = priceRepository.save(new Price(14,t3));
+                Price p4 = priceRepository.save(new Price(15,t4));
 
 
                 Movie m1 = movieRepository.save( new Movie(

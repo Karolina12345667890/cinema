@@ -11,11 +11,18 @@
 <div class="container">
 
     <div class="container">
+        <img th:src="@{${show.movie.poster}}" th:width="100">
         <div th:text="${show.movie.name}"></div>
+
         <div th:text="${#dates.format(show.timeShow, 'yyyy-MM-dd')}"></div>
         <div th:text="${#dates.format(show.timeShow, 'HH:mm')}"></div>
 
         <form th:action="@{/reservedSeatForm}" th:object="${show}" method="post">
+            <h7>Bilet: </h7>
+            <div th:each="p : ${price}">
+                <input type="checkbox" th:field="*{price}" th:value="${p.id}" th:text="${p.typeTicket.name+ ' = ' + p.price + 'zł' }">
+            </div>
+
             <div>EKRAN</div>
             <form>
                 <input type="hidden" th:field="*{id}">

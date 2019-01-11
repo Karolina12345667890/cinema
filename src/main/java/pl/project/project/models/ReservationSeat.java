@@ -17,17 +17,28 @@ public class ReservationSeat {
     @ManyToOne
     @JoinColumn(name = "reservations_id")
     private Reservation reservation;
+    @ManyToOne
+    @JoinColumn(name= "price_id")
+    private Price price;
 
 
-    public ReservationSeat(Show show, Seat seat, Reservation reservation) {
+    public ReservationSeat(Show show, Seat seat, Reservation reservation, Price price) {
         this.show = show;
         this.seat = seat;
         this.reservation = reservation;
+        this.price = price;
     }
 
     public ReservationSeat() {
     }
 
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 
     public int getId() {
         return id;

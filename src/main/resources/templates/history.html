@@ -16,6 +16,8 @@
             <th scope="col"> Film</th>
             <th scope="col"> Rząd</th>
             <th scope="col"> Miejsce</th>
+            <th scope="col">Data</th>
+            <th scope="col">Bilet</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +32,8 @@
                         <td  scope="row" class="align-middle" th:text="${seat.show.movie.name}"></td>
                         <td  scope="row" class="align-middle" th:text="${seat.seat.row}"></td>
                         <td  scope="row" class="align-middle" th:text="${seat.seat.seat}"></td>
+                        <td  scope="row" class="align-middle" th:text="${seat.show.timeShow}"></td>
+                        <td  scope="row" class="align-middle" th:text="${seat.price.typeTicket.name + ' = ' +seat.price.price + 'zł'}"></td>
                     </div>
                 </div>
             </tr>
