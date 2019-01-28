@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface SeatRepository extends JpaRepository<Seat,Integer> {
     @Query("select s from Seat s where s.hall = :hall order by s.row, s.seat")
-    List<Seat> findSeatByRoom(@Param("hall") Hall hall);
+    List<Seat> findSeatByHall(@Param("hall") Hall hall);
 
     @Query(value = "select s from Seat s where s.hall = :hall and s.row = :row and s.seat = :seat")
-    Seat findSeatByRoomAndSeat(@Param("hall") Hall hall, @Param("row") Integer row, @Param("seat") Integer number);
+    Seat findSeatByHallAndSeat(@Param("hall") Hall hall, @Param("row") Integer row, @Param("seat") Integer number);
 }

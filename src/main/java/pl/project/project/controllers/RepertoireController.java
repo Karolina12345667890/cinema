@@ -25,9 +25,11 @@ public class RepertoireController {
 
     @RequestMapping(value = "/repertuar", method = RequestMethod.GET)
     public String showRepertoire(Model model, @RequestParam(name = "date", required = false, defaultValue = "-1") String date){
+
         model.addAttribute("moviePoster",movieRepository.findAll());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         LocalDate now;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         if(!date.equals("-1")){
             now = LocalDate.parse(date, dtf);
@@ -54,8 +56,6 @@ public class RepertoireController {
 
         Date timeShow = Date.from(now.atTime(0,0).atZone(ZoneId.systemDefault()).toInstant());
         Date nextDay = Date.from(now.plusDays(1).atTime(0,0).atZone(ZoneId.systemDefault()).toInstant());
-
-
 
 
         List<Movie> movieList = movieRepository.findByShowDate(timeShow, nextDay);

@@ -24,3 +24,17 @@ body{
 table{
     margin: 0 auto;
 }
+h3{color:  	#7FFFD4;
+    font-family: "Comic Sans MS, Comic Sans, cursive";
+    font-size: 30px;
+}
+h4{color:  	#90EE90;
+    font-family: "Comic Sans MS, Comic Sans, cursive";
+    font-size: 20px;
+}
+.text{
+    color:  	#AFEEEE;
+    font-family: "Comic Sans MS, Comic Sans, cursive";
+    font-size: 20px;
+    text-align: center;
+}

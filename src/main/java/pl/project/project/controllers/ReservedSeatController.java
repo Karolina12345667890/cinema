@@ -49,7 +49,7 @@ public class ReservedSeatController {
         Hall hall = hallRepository.findById(show.getHall().getId()).get();
 
 
-        List<Seat> roomSeats = new ArrayList<>(seatRepository.findSeatByRoom(show.getHall()));
+        List<Seat> hallSeats = new ArrayList<>(seatRepository.findSeatByHall(show.getHall()));
 
         List<String> listOfReservedSeats = new ArrayList<>();
 
@@ -59,11 +59,12 @@ public class ReservedSeatController {
 
         show.setListOfReservedSeats(listOfReservedSeats);
 
+        // klucz-> rząd; wartość-> lista miejsc w rzędzie
         Map<Integer, List<Seat>> seats = new HashMap<>();
 
         for (int i = 0; i < 5; i++) {
             List<Seat> tmp = new ArrayList<>();
-            for (Seat seat : roomSeats){
+            for (Seat seat : hallSeats){
                 if (seat.getRow() == i+1){
                     tmp.add(seat);
                 }
@@ -82,13 +83,13 @@ public class ReservedSeatController {
     @RequestMapping(value = "/reservedSeatForm", method = RequestMethod.POST)
     public String processForm(@Valid @ModelAttribute("show") Show show, BindingResult errors){
         if (errors.hasErrors()){
-            return "admin/roomForm";
+            return "admin/reservedSeatForm";
         }
 
-        List<ReservationSeat> roomSeats = new ArrayList<>(reservationSeatRepository.findReservedSeatByScreening(show));
+        List<ReservationSeat> hallSeats = new ArrayList<>(reservationSeatRepository.findReservedSeatByScreening(show));
         Price price = show.getPrice();
         List<String> listOfSeats = new ArrayList<>();
-        for (ReservationSeat rs : roomSeats){
+        for (ReservationSeat rs : hallSeats){
             listOfSeats.add(rs.getSeat().getRow() + "-" + rs.getSeat().getSeat());
         }
 
@@ -108,10 +109,13 @@ public class ReservedSeatController {
 
         Reservation reservation = new Reservation(new HashSet<>(), user);
         reservationRepository.save(reservation);
+
+
         for (String s : show.getListOfReservedSeats()){
             if (!listOfSeats.contains(s)) {
                 String[] parts = s.split("-");
-                Seat seat = seatRepository.findSeatByRoomAndSeat(show.getHall(), Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+                Seat seat = seatRepository.findSeatByHallAndSeat(show.getHall(), Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+
                 reservationSeatRepository.save(
                         new ReservationSeat( show,seat,reservation,price));
             }

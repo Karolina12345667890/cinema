@@ -6,15 +6,18 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.project.project.controllers.FilterController;
+import pl.project.project.exception.MovieNotFoundException;
 import pl.project.project.models.Movie;
 import pl.project.project.repositories.MovieRepository;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class MovieService {
+public class MovieService implements MovieServices{
 
     @Autowired
     private MovieRepository movieRepository;
@@ -49,4 +52,11 @@ public class MovieService {
         return moviePage;
     }
 
+    @Transactional
+    @Override
+    public Movie getMovie(Integer id) {
+        Optional<Movie> optional = movieRepository.findById(id);
+        if( !optional.isPresent() )optional.orElseThrow(()->new MovieNotFoundException(id));
+        return optional.get();
+    }
 }

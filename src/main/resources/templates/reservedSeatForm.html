@@ -11,19 +11,20 @@
 <div class="container">
 
     <div class="container">
-        <img th:src="@{${show.movie.poster}}" th:width="100">
-        <div th:text="${show.movie.name}"></div>
+        <img th:src="@{${show.movie.poster}}" th:width="100"><br>
+        <h4 th:text="${show.movie.name}"></h4>
 
-        <div th:text="${#dates.format(show.timeShow, 'yyyy-MM-dd')}"></div>
-        <div th:text="${#dates.format(show.timeShow, 'HH:mm')}"></div>
+        <h4 th:text="${#dates.format(show.timeShow, 'yyyy-MM-dd')}"></h4>
+        <h4 th:text="${#dates.format(show.timeShow, 'HH:mm')}"></h4>
 
         <form th:action="@{/reservedSeatForm}" th:object="${show}" method="post">
-            <h7>Bilet: </h7>
+            <br>
+            <h3 >Bilet: </h3>
             <div th:each="p : ${price}">
-                <input type="checkbox" th:field="*{price}" th:value="${p.id}" th:text="${p.typeTicket.name+ ' = ' + p.price + 'zł' }">
+                <input type="checkbox" class="text" th:field="*{price}" th:value="${p.id}" th:text="${p.typeTicket.name+ ' = ' + p.price + 'zł' }">
             </div>
-
-            <div>EKRAN</div>
+            <br>
+            <h3>EKRAN</h3>
             <form>
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{hall}">
@@ -32,6 +33,7 @@
                         <input type="checkbox" class="" th:field="*{listOfReservedSeats}" th:value="${seat.row + '-' + seat.seat}" th:disabled="${listOfResSeats.contains(seat.row + '-' + seat.seat) ? true : false}">
                     </div>
                 </div>
+                <br>
                 <button type="submit" class="btn btn-primary">Zarezerwuj</button>
             </form>
         </form>

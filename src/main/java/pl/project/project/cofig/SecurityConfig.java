@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
 /**
  * klasa konfigurująca pierwszy panel logowania
@@ -39,6 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
+    public AccessDeniedHandler createAccessDeniedHandler(){
+        AccessDeniedHandlerImpl impl = new AccessDeniedHandlerImpl();
+        impl.setErrorPage("/error403");//url
+        return impl;
+    }
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
@@ -57,6 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
 
+        http.exceptionHandling().accessDeniedHandler(createAccessDeniedHandler());
 
     }
+
 }

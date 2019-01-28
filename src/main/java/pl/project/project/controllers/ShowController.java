@@ -35,7 +35,7 @@ public class ShowController {
     }
 
     @ModelAttribute("hallList")
-    public List<Hall> loadRooms(){
+    public List<Hall> loadHall(){
         List<Hall> halls = hallRepository.findAll();
         return halls;
     }
@@ -61,7 +61,6 @@ public class ShowController {
         if (errors.hasErrors()){
             return "admin/showForm";
         }
-
         showRepository.save(show);
         return "redirect:showList";
     }

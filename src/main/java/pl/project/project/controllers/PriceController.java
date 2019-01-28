@@ -42,9 +42,9 @@ public class PriceController {
     @RequestMapping(value = "/admin/priceForm", method = RequestMethod.GET)
     public String showPriceForm(Model model, @RequestParam(name = "id", required = false, defaultValue = "-1") Integer id){
         if (id > 0){
-            model.addAttribute("price", priceRepository.findById(id).get());
+            model.addAttribute("prices", priceRepository.findById(id).get());
         }else{
-            model.addAttribute("price", new Price());
+            model.addAttribute("prices", new Price());
         }
         return "admin/priceForm";
     }

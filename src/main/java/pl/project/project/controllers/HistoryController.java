@@ -45,8 +45,10 @@ public class HistoryController {
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String showHistory(Model model)
     {
+        //obiekt aktualnie uwirzytelnionego użytkownika
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
+        //jeśli principal jest instancją klasy UserDeatils
         if (principal instanceof UserDetails) {
 
             username = ((UserDetails)principal).getUsername();

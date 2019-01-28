@@ -12,18 +12,25 @@
 
  <div th:each="movie : ${movieListDetails}">
      <!--<label>Plakat:</label>-->
-     <img th:src="@{${movie.poster}}" th:width="100">
+     <img class="text-center" th:src="@{${movie.poster}}" th:width="100">
      <br><br>
-     <h4>Tytuł filmu: </h4>
-         <label th:text="${movie.name}"></label><br>
-     <h4>Reżyser: </h4>
-     <div th:text="${movie.director}"></div>
-     <h4>Opis: </h4>
-     <div th:text="${movie.description}"></div>
-     <h4>Kraj produkcji: </h4>
-     <div th:text="${movie.country}"></div>
-     <h4>Więcej o filmie na stronie: </h4>
-     <a th:href="@{${movie.adnotation}}" th:text="${movie.adnotation}"></a>
+     <h4 class="text-center">Tytuł filmu: </h4>
+        <div class="text" th:text="${movie.name}"></div><br>
+     <h4 class="text-center">Reżyser: </h4>
+        <div class="text" th:text="${movie.director}"></div><br>
+     <h4 class="text-center">Opis: </h4>
+        <div class="text" th:text="${movie.description}"></div><br>
+     <h4 class="text-center">Kraj produkcji: </h4>
+        <div class="text" th:text="${movie.country}"></div><br>
+     <h4 class="text-center">Gatunek filmu: </h4>
+     <div th:each="type : ${typeMovie}">
+         <div class="text" th:text="${type.name}"></div>
+     </div>
+     <br>
+     <h4 class="text-center">Więcej o filmie na stronie: </h4>
+        <div class="text-center">
+             <a  href="#" class="badge badge-success" th:href="@{${movie.adnotation}}" th:text="${movie.adnotation}"></a><br>
+        </div>
 </div>
 <br><br><br><br>
     <a href="/admin/movieList" class="btn btn-primary">Wróć</a>

@@ -27,6 +27,7 @@ public class Price {
 
     }
 
+
     public int getId() {
         return id;
     }
@@ -35,7 +36,7 @@ public class Price {
         this.id = id;
     }
 
-    public float getPrice() {
+    public Integer getPrice() {
         return price;
     }
 

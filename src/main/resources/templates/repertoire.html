@@ -21,7 +21,7 @@
         <tr>
             <th>Plakat</th>
             <th scope="col">Tytuł</th>
-            <th scope="col">Godziny seansów</th>
+            <!--<th scope="col">Godziny seansów</th>-->
             <th scope="col">Rezerwuj miejsce</th>
         </tr>
         </thead>
@@ -43,14 +43,14 @@
 
 
 
+            <!--<td class="align-middle">-->
+                <!--<th:block th:each="showList : ${msMap.getValue()}">-->
+                    <!--&lt;!&ndash;<label type="datetime-local" th:text="${#dates.format(showList.timeShow, 'HH:mm')}"></label>&ndash;&gt;-->
+                <!--</th:block>-->
+            <!--</td>-->
             <td class="align-middle">
                 <th:block th:each="showList : ${msMap.getValue()}">
-                    <label type="datetime-local" th:text="${#dates.format(showList.timeShow, 'HH:mm')}"></label>
-                </th:block>
-            </td>
-            <td class="align-middle">
-                <th:block th:each="showList : ${msMap.getValue()}">
-                    <a th:href="@{reservedSeatForm(id=${showList.id})}" class="btn btn-secondary btn-sm" th:text="Rezerwuj"></a>
+                    <a th:href="@{reservedSeatForm(id=${showList.id})}" class="btn btn-secondary btn-sm" th:text="${'Rezerwuj na: ' + #dates.format(showList.timeShow, 'HH:mm')}"></a>
                 </th:block>
             </td>
         </tr>

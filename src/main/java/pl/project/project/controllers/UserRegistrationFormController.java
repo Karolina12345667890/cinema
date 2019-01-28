@@ -37,28 +37,4 @@ public class UserRegistrationFormController {
         return "registrationSuccess";
     }
 
-
-
-//    @GetMapping("/registrationFrom")
-//    public String registration(Model model) {
-//        model.addAttribute("userCommand", new User());
-//        return "registrationFrom";
-//    }
-//
-//    @PostMapping("/registrationFrom")
-//    public String registration(@Valid @ModelAttribute("userCommand") User userForm, BindingResult bindingResult) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return "registrationFrom";
-//        }
-//        userService.save(userForm);
-//        return "registrationSuccess";
-//    }
-
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        //aby użytkownik nie mógł sobie wstrzyknąć aktywacji konta oraz ról (np., ADMIN)
-//        //roles są na wszelki wypadek, bo warstwa serwisów i tak ustawia ROLE_USER dla nowego usera
-//        binder.setDisallowedFields("enabled", "roles");
-//    }
 }

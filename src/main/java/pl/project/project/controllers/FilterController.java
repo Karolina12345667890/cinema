@@ -6,7 +6,7 @@ public class FilterController {
 
     private String phrase;
     private String countryFilter;
-  private String directoryFilter;
+    private String directoryFilter;
 
     public boolean isEmpty()
     {

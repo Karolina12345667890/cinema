@@ -7,10 +7,16 @@
 </head>
 
 <body>
+<div id="main" class="container">
 
-<header th:replace="fragments/header :: header(index)"></header>
-<div id="main" class="card-body">
-    <h1>wertyu</h1>
+    <div>
+        <h1>404 - Nie znaleziono filmu</h1>
+        <div>
+            URL żądania: <span th:text="${url}"></span></br>
+            Wyjątek: <span th:object="${exception}" th:text="*{message}"></span>
+        </div>
+    </div>
+
 </div>
 
 <footer th:replace="fragments/footer :: footer"></footer>

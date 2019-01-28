@@ -34,7 +34,7 @@ public class Movie {
     @Length(max = 30)
     private String country;
     @NotBlank
-    @Length(max = 50)
+    //@Length(max = 50)
     private String adnotation;
 
     public Movie(@NotBlank @Length(max = 80) String name, @Length(min = 5, max = 50) String director, @Length(min = 3, max = 50000) String poster, String country,String adnotation,  Set<TypeMovie> typeMovie, @NotBlank String description, Set<Show> shows) {

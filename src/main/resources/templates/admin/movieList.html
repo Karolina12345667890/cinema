@@ -37,8 +37,9 @@
             <th scope="col">Plakat</th>
             <th scope="col">Tytył</th>
             <th scope="col">Reżyser</th>
-
+            <div sec:authorize="hasRole('ADMIN')">
             <th scope="col" class="text-right">Edytuj / Usuń</th>
+            </div>
 
         </tr>
         </thead>
@@ -56,22 +57,33 @@
                 <a th:href="@{movieDetails(id=${movie.id})}" th:text="${movie.name}"></a></td>
             <td class="align-middle" th:text="${movie.director}"></td>
 
+            <div sec:authorize="hasRole('ADMIN')">
             <td class="text-right">
                 <a th:href="@{movieForm(id=${movie.id})}" class="btn btn-secondary btn-sm">Edytuj</a>
                 <a th:href="@{deleteMovie(id=${movie.id})}" class="btn btn-danger btn-sm">Usuń</a>
             </td>
+            </div>
         </tr>
         </tbody>
     </table>
-    <div th:if="${moviePage.totalPages > 0}" class="pagination"
+
+    <nav aria-label="...">
+        <ul class="pagination pagination-sm">
+    <div th:if="${moviePage.totalPages > 0}"
          th:each="pageNumber : ${pageNumbers}">
-        <a th:href="@{/admin/movieList(size=${moviePage.size}, page=${pageNumber -1})}"
+        <li class="page-item ">
+        <a class="page-link" href="#" th:href="@{/admin/movieList(size=${moviePage.size}, page=${pageNumber -1})}"
            th:text="${pageNumber}"
-           th:class="${pageNumber==moviePage.number } ? active"></a>
+           ></a> </li>
     </div>
+        </ul>
+    </nav>
+
     <div sec:authorize="hasRole('ADMIN')">
-         <a href="/admin/movieForm" class="btn btn-primary">Dodaj</a>
+         <!--<a href="/admin/movieForm" class="btn btn-primary">Dodaj</a>-->
+        <a th:href="@{movieForm}" class="btn btn-primary">Dodaj</a>
     </div>
+
 </div>
 <footer th:replace="fragments/footer :: footer"></footer>
 <th:block th:include="fragments/general :: scripts"></th:block>

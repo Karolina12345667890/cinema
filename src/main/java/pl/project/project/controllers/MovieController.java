@@ -1,14 +1,15 @@
 package pl.project.project.controllers;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import pl.project.project.exception.MovieNotFoundException;
 import pl.project.project.models.Movie;
 import pl.project.project.models.TypeMovie;
 import pl.project.project.repositories.MovieRepository;
@@ -16,14 +17,13 @@ import pl.project.project.repositories.TypeMovieRepository;
 import pl.project.project.services.MovieService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @SessionAttributes("searchCommand")
 @Controller
+@Log4j2
 public class MovieController {
 
     @Autowired
@@ -46,7 +46,7 @@ public class MovieController {
     }
 
     @GetMapping(value="/admin/movieList.html", params = {"all"})
-    public String resetehicleList(@ModelAttribute("searchCommand") FilterController search){
+    public String resetList(@ModelAttribute("searchCommand") FilterController search){
         search.clear();
         return "redirect:admin/movieList.html";
     }
@@ -57,11 +57,12 @@ public class MovieController {
 
         model.addAttribute("movieList", movieRepository.findAll());
         int currentPage = page.orElse(0);
-        int pageSize = size.orElse(2);
+        int pageSize = size.orElse(3);
         Page<Movie> moviePage = movieService.findPagined(PageRequest.of(currentPage,pageSize),search);
 //        Page<Movie> moviePage = movieService.findPagined(PageRequest.of(currentPage,pageSize));
         model.addAttribute("moviePage",moviePage);
 
+        //wytworzenie listy numerów stron
         int totalPages = moviePage.getTotalPages();
         if(totalPages > 0)
         {
@@ -72,18 +73,17 @@ public class MovieController {
         }
         return "admin/movieList";
     }
+//    @RequestParam(name = "id", required = false, defaultValue = "-1")
 
-    @RequestMapping(value = "/admin/movieForm", method = RequestMethod.GET)
-    public String showMovieForm(Model model, @RequestParam(name = "id", required = false, defaultValue = "-1") Integer id){
-        if (id > 0){
-            model.addAttribute("movie", movieRepository.findById(id).get());
-        }else{
-            model.addAttribute("movie", new Movie());
-        }
+    @RequestMapping(value = {"/admin/movieForm","/movieForm"}, method = RequestMethod.GET)
+    public String showMovieForm(Model model, Optional<Integer> id){
+
+            model.addAttribute("movie",id.isPresent()? movieService.getMovie(id.get()) : new Movie());
+
         return "admin/movieForm";
     }
 
-    @RequestMapping(value = "/admin/movieForm", method = RequestMethod.POST)
+    @RequestMapping(value = {"/admin/movieForm","/movieForm"}, method = RequestMethod.POST)
     public String processForm(@Valid @ModelAttribute("movie") Movie movie, BindingResult errors){
         if (errors.hasErrors()){
             return "admin/movieForm";
@@ -93,19 +93,32 @@ public class MovieController {
     }
 
 
-    @RequestMapping(value = "/admin/deleteMovie", method = RequestMethod.GET)
-    public String deleteMovie(@RequestParam(name = "id") Integer id){
+    @RequestMapping(value = {"/admin/deleteMovie","/deleteMovie"}, method = RequestMethod.GET)
+    public String deleteMovie(Integer id){
         if (movieRepository.existsById(id)){
             movieRepository.deleteById(id);
+        }
+        else{
+            throw new MovieNotFoundException(id);
         }
         return "redirect:movieList";
     }
 
-    @RequestMapping(value = "/admin/movieDetails", method = RequestMethod.GET)
-    public String showMovieDetails(Model model, @RequestParam(name = "id" , required = false, defaultValue = "-1") Integer id)
+    @RequestMapping(value = {"/admin/movieDetails", "/movieDetails"}, method = RequestMethod.GET)
+    public String showMovieDetails(Model model, Integer id)
     {
-        model.addAttribute("typeMovie",typeMovieRepository.findAll());
-        model.addAttribute("movieListDetails", movieRepository.findById(id).get());
+
+        Movie m = movieService.getMovie(id);
+        Set<TypeMovie> set = m.getTypeMovie();
+        List<TypeMovie> list = new ArrayList<>();
+        for (TypeMovie t : set)
+        {
+            list.add(t);
+        }
+
+        model.addAttribute("typeMovie",list);
+        model.addAttribute("movieListDetails",m);
         return "admin/movieDetails";
     }
+
 }

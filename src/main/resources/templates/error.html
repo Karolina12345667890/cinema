@@ -8,9 +8,18 @@
 
 <body>
 
-<header th:replace="fragments/header :: header(index)"></header>
-<div id="main" class="card-body">
-    <h1>wertyu</h1>
+<div id="main" class="container">
+
+    <div>
+        <h1>Domyślny widok błędu w Spring Boot</h1>
+        <div>
+            Wiadomość: <span th:text="${message}"></span></br>
+            Wyjątek: <span th:text="${exception}"></span></br>
+
+            StackTrace: <span th:text="${stackTrace}" ></span>
+        </div>
+    </div>
+
 </div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
@@ -18,3 +27,4 @@
 
 </body>
 </html>
+
