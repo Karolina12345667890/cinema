@@ -28,6 +28,8 @@ public class MovieService implements MovieServices{
         int  currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
 
+        System.out.println("ala ma kota");
+
         List<Movie> movie;
         if(search.isEmpty())
         {
